@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<product productid="modrestrictions" active="1">
+	<title>Ограничения модераторов</title>
+	<description>Позволяет выставить ограничения на максимальное кол-во выдаваемых нарушений и удаляемых сообщений.</description>
+	<version>1.0</version>
+	<url />
+	<versioncheckurl />
+	<dependencies>
+	</dependencies>
+	<codes>
+	</codes>
+	<templates>
+	</templates>
+	<plugins>
+	</plugins>
+	<phrases>
+		<phrasetype name="vBulletin Settings" fieldname="vbsettings">
+			<phrase name="settinggroup_modrestrict_setting" date="1436183506" username="admin" version="1.0"><![CDATA[Ограничения модераторов]]></phrase>
+			<phrase name="setting_modrestrict_enable_desc" date="1436183540" username="admin" version="1.0" />
+			<phrase name="setting_modrestrict_enable_title" date="1436183540" username="admin" version="1.0"><![CDATA[Продукт включён]]></phrase>
+			<phrase name="setting_modrestrict_infraction_count_desc" date="1436183829" username="admin" version="1.0" />
+			<phrase name="setting_modrestrict_infraction_count_title" date="1436183829" username="admin" version="1.0"><![CDATA[Лимит дней для выдаваемых нарушений]]></phrase>
+			<phrase name="setting_modrestrict_post_count_desc" date="1436183799" username="admin" version="1.0"><![CDATA[Укажите любое целое число, больше 0 (нуля), именно в этом промежутке будет вестись отсчёт по удаляемым постам модераторами (и супер-модераторами).<br />
+<strong>Пример работы:</strong> если вы укажите 5, то как только модератор удалит сообщение, с этого дня начнётся вестись отсчёт и если высставлен лимит в 3 удаляемых сообщения в эти дни, то как только он достигнет лимита, ему будет выдано уведомление, что он достиг лимита и счётчик сбросится по истечению данного срока. <br />
+<strong>Данное правило действительно и для опции ниже.</strong>]]></phrase>
+			<phrase name="setting_modrestrict_post_count_title" date="1436183799" username="admin" version="1.0"><![CDATA[Лимит дней для удаляемых постов]]></phrase>
+		</phrasetype>
+	</phrases>
+	<options>
+		<settinggroup name="modrestrict_setting" displayorder="590">
+			<setting varname="modrestrict_enable" displayorder="10">
+				<datatype>free</datatype>
+				<optioncode>yesno</optioncode>
+				<defaultvalue>1</defaultvalue>
+			</setting>
+			<setting varname="modrestrict_post_count" displayorder="20">
+				<datatype>free</datatype>
+			</setting>
+			<setting varname="modrestrict_infraction_count" displayorder="30">
+				<datatype>free</datatype>
+			</setting>
+		</settinggroup>
+	</options>
+	<helptopics>
+	</helptopics>
+	<cronentries>
+	</cronentries>
+	<faqentries>
+	</faqentries>
+</product>
