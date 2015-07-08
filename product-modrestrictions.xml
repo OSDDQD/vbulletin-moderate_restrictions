@@ -13,8 +13,45 @@
 	<templates>
 	</templates>
 	<plugins>
+		<plugin active="1" executionorder="5">
+			<title>Проверка при выдачи нарушений</title>
+			<hookname>infractiondata_presave</hookname>
+			<phpcode><![CDATA[if($this->registry->options['modrestrict_enable']) 
+{
+	require_once(DIR . '/includes/class_modrestriction.php');
+	$modControl = new moderateRestriction($this->registry);
+	if($this->fetch_field('action') != '2') {
+		if($data = $modControl->verify($this->registry->userinfo['userid'], $this->registry->options['modrestrict_infraction_count'], 'infraction', $this->registry->userinfo['permissions']['modrestriction_infraction'])) 
+		{
+			eval(standard_error(fetch_error($data['error'], $data['range'], $data['limit'])));
+		}	
+	}
+}]]></phpcode>
+		</plugin>
+		<plugin active="1" executionorder="5">
+			<title>Проверка при удалении сообщений</title>
+			<hookname>postdata_delete</hookname>
+			<phpcode><![CDATA[if($this->registry->options['modrestrict_enable'] && $this->registry->userinfo['permissions']['modrestriction_post']) 
+{
+	require_once(DIR . '/includes/class_modrestriction.php');
+	$modControl = new moderateRestriction($this->registry);
+	if($data = $modControl->verify($this->registry->userinfo['userid'], $this->registry->options['modrestrict_post_count'], 'post', $this->registry->userinfo['permissions']['modrestriction_post'])) 
+	{
+		eval(standard_error(fetch_error($data['error'], $data['range'], $data['limit'])));
+	}	
+}]]></phpcode>
+		</plugin>
 	</plugins>
 	<phrases>
+		<phrasetype name="Permissions" fieldname="cppermission">
+			<phrase name="modrestriction" date="1436334091" username="admin" version="1.0"><![CDATA[Ограничения модераторов]]></phrase>
+			<phrase name="modrestriction_infraction" date="1436334410" username="admin" version="1.0"><![CDATA[Укажите числовой лимит на количество выдаваемых нарушений.<dfn>Если вы укажите 0, то для данной групы не будет ограничений.</dfn>]]></phrase>
+			<phrase name="modrestriction_post" date="1436334423" username="admin" version="1.0"><![CDATA[Укажите числовой лимит на количество удаляемых сообщений.<dfn>Если вы укажите 0, то для данной групы не будет ограничений.</dfn>]]></phrase>
+		</phrasetype>
+		<phrasetype name="Error Messages" fieldname="error">
+			<phrase name="modrestriction_limit_infraction" date="1436341276" username="admin" version="1.0"><![CDATA[Вы достигли лимита в {2} нарушений, доступных вам для выдачи пользователям за {1} дней.]]></phrase>
+			<phrase name="modrestriction_limit_post" date="1436341216" username="admin" version="1.0"><![CDATA[Вы достигли лимита в {2} сообщений, доступных вам для удаления постов за {1} дней.]]></phrase>
+		</phrasetype>
 		<phrasetype name="vBulletin Settings" fieldname="vbsettings">
 			<phrase name="settinggroup_modrestrict_setting" date="1436183506" username="admin" version="1.0"><![CDATA[Ограничения модераторов]]></phrase>
 			<phrase name="setting_modrestrict_enable_desc" date="1436183540" username="admin" version="1.0" />

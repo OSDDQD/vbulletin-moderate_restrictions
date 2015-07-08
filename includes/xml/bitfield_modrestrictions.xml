@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<bitfields product="modrestrictions">
+	<bitfielddefs>
+		<group name="ugp">
+ 			<group name="modrestriction">
+				<bitfield name="modrestriction_post" intperm="true" group="modrestriction" phrase="modrestriction_post">0</bitfield>
+				<bitfield name="modrestriction_infraction" intperm="true" group="modrestriction" phrase="modrestriction_infraction">1</bitfield>
+			</group>
+		</group>
+	</bitfielddefs>
+</bitfields>
